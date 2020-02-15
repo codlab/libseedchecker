@@ -1,0 +1,33 @@
+{
+  "name": "libseedchecker",
+  "version": "1.0.1",
+  "description": "",
+  "main": "dist/index.js",
+  "dependencies": {
+    "big-integer": "^1.6.48",
+    "tslib": "^1.10.0",
+    "typescript": "^3.7.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc 2 ; echo done"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codlab/libseedchecker.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/codlab/libseedchecker/issues"
+  },
+  "homepage": "https://github.com/codlab/libseedchecker#readme",
+  "files": [
+    "package.json",
+    "dist/",
+    "configs/",
+    "README.md",
+    "LICENSE"
+  ]
+}
