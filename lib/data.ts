@@ -1,4 +1,4 @@
-import _Data from "../configs/data.json";
+const _Data = require("../configs/data.json");
 
 export interface Data {
   locations: string[],

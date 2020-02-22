@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const bigInt = require("big-integer");
 const toxtricity_1 = require("./toxtricity");
-const genders_json_1 = require("../configs/genders.json");
 const data_1 = require("./data");
+const bigInt = require("big-integer");
+const GenderRatios = require("../configs/genders.json");
 var PokemonEntry_1 = require("./data/PokemonEntry");
 exports.PokemonEntry = PokemonEntry_1.PokemonEntry;
 var OnlineDataProvider_1 = require("./data/OnlineDataProvider");
@@ -151,7 +151,7 @@ class PokemonFrame {
                 ability = abilityNames[this.nextInt(bigInt[3], bigInt[3])];
             }
         }
-        var gt = genders_json_1.default[pkmn.species()];
+        var gt = GenderRatios[pkmn.species()];
         var gender = GENDERS.MALE;
         if (gt == 255) {
             gender = asGender(2);

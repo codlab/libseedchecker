@@ -31,14 +31,14 @@ export class OnlineDataProvider implements DataProvider {
 
     return (nests as any[]).map((nest, nestId) => ({
       nestId,
-      pokemons: nest.Entries.map(pokemon => new PokemonEntry(pokemon))
+      pokemons: (nest.Entries as any[]).map(pokemon => new PokemonEntry(pokemon))
     }) );
   }
 
   load_nests(): Promise<GameNests[]> {
-    return Promise.all(
-      [Game.SHIELD, Game.SWORD].map(game => this.load_nests_in_game(game))
-    ).then(result => result.map((nests, game) => ({nests, game}) ));
+    const games = [Game.SHIELD, Game.SWORD];
+    return Promise.all( games.map(game => this.load_nests_in_game(game)) )
+    .then(result => result.map((nests, game) => ({nests, game: games[game]}) ));
   }
 
 }

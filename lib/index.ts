@@ -4,10 +4,11 @@ import { OnlineDataProvider } from './data/OnlineDataProvider';
 //
 
 import BigIntegerDefinition from "big-integer";
-const bigInt = require("big-integer");
 import Toxtricity from "./toxtricity"; 
-import GenderRatios from "../configs/genders.json";
 import Data from "./data";
+
+const bigInt = require("big-integer");
+const GenderRatios = require("../configs/genders.json");
 
 import { PokemonEntry } from "./data/PokemonEntry";
 

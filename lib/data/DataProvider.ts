@@ -2,6 +2,7 @@ import { PokemonEntry } from './PokemonEntry';
 const nest = require("../../configs/nests.json");
 
 export enum Game {
+  NONE,
   SHIELD,
   SWORD
 }

@@ -43,7 +43,9 @@ class OnlineDataProvider {
         });
     }
     load_nests() {
-        return Promise.all([DataProvider_1.Game.SHIELD, DataProvider_1.Game.SWORD].map(game => this.load_nests_in_game(game))).then(result => result.map((nests, game) => ({ nests, game })));
+        const games = [DataProvider_1.Game.SHIELD, DataProvider_1.Game.SWORD];
+        return Promise.all(games.map(game => this.load_nests_in_game(game)))
+            .then(result => result.map((nests, game) => ({ nests, game: games[game] })));
     }
 }
 exports.OnlineDataProvider = OnlineDataProvider;
