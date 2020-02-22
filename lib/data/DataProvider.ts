@@ -1,5 +1,5 @@
 import { PokemonEntry } from './PokemonEntry';
-import nest from "../../configs/nests";
+const nest = require("../../configs/nests.json");
 
 export enum Game {
   SHIELD,
@@ -37,4 +37,4 @@ export interface DataProvider {
   load_nests: () => Promise<GameNests[]>
 }
 
-export const Nests: Nest[] = nest.forEach(([normal, rare, name]) => ({normal, rare, name}));
+export const Nests: Nest[] = nest.forEach(([normal, rare, name]: number[]) => ({normal, rare, name}));
