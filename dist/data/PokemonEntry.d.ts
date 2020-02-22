@@ -1,0 +1,54 @@
+export interface PokemonEntryRepresentation {
+    Ability: number;
+    AltForm: number;
+    BonusTableID: number;
+    DropTableID: number;
+    DynamaxBoost: number;
+    DynamaxLevel: number;
+    EntryIndex: number;
+    AbilityPermitted: number;
+    Field_05: number;
+    Field_06: number;
+    Field_07: number;
+    Field_08: number;
+    Field_09: number;
+    Field_0A: number;
+    Field_13: number;
+    Field_14: number;
+    Field_15: number;
+    Field_16: number;
+    Field_1C: number;
+    Field_1D: number;
+    Field_1E: number;
+    Field_1F: number;
+    Field_20: number;
+    Field_21: number;
+    Field_22: number;
+    Field_23: number;
+    Field_24: number;
+    FlawlessIVs: number;
+    Gender: number;
+    IsGigantamax: number;
+    Level: number;
+    MaxRank: number;
+    MinRank: number;
+    Move0: number;
+    Move1: number;
+    Move2: number;
+    Move3: number;
+    Nature: number;
+    Probabilities: [number, number, number, number, number];
+    ShinyForced: number;
+    Species: number;
+    LevelTableID: number;
+}
+export declare class PokemonEntry {
+    data: PokemonEntryRepresentation;
+    constructor(data: PokemonEntryRepresentation);
+    flawLessIvsCount: () => number;
+    isGigantamax: () => boolean;
+    isShinyForced: () => boolean;
+    species: () => number;
+    ability: () => number;
+    altForm: () => number;
+}

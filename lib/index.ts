@@ -1,15 +1,21 @@
+import { OnlineDataProvider } from './data/OnlineDataProvider';
 //
 // original file : https://github.com/Leanny/leanny.github.io/blob/master/seedchecker/common.js
 //
 
+import BigIntegerDefinition from "big-integer";
 const bigInt = require("big-integer");
 import Toxtricity from "./toxtricity"; 
 import GenderRatios from "../configs/genders.json";
 import Data from "./data";
 
-console.log(bigInt);
+import { PokemonEntry } from "./data/PokemonEntry";
 
-export type SeedInteger = bigInt.BigInteger;
+export { PokemonEntry } from "./data/PokemonEntry";
+export { PokemonEntryRepresentation } from "./data/PokemonEntry";
+export { OnlineDataProvider } from "./data/OnlineDataProvider";
+
+export type SeedInteger = BigIntegerDefinition.BigInteger;
 export enum SHINY {
     NONE,
     STAR,
@@ -25,24 +31,6 @@ export enum GENDERS {
 export interface SeedInformation {
     seed: SeedInteger,
     frame: number
-}
-
-export interface PokemonConfiguration {
-    EntryIndex: number,
-    Species: number,
-    AltForm: number,
-    LevelTableID: number,
-    Ability: number,
-    IsGigantamax: boolean,
-    DropTableID: number,
-    BonusTableID: number,
-    Probabilities: number[],
-    Gender: number,
-    FlawlessIVs: number,
-    AbilityPermitted: number,
-    MinRank: number,
-    MaxRank: number,
-    ShinyForced: number, //type forced if any
 }
 
 function asGender(idx: number): GENDERS {
@@ -86,15 +74,15 @@ class PokemonFrame {
         this.original_frame = frame || 0;
         this.frame = frame || 0;
 
-        this.setSeed(this.original_seed, this.original_frame);
+        this.setSeed(this.original_seed);
     }
 
     private isBigInteger(seed: SeedInteger | string): seed is SeedInteger {
         return (<SeedInteger>seed).divide !== undefined;
     }
 
-    public current: SeedInformation = () => ({seed: this.seed, frame: this.frame});
-    public original: SeedInformation = () => ({seed: this.original_seed, frame: this.original_frame});
+    public current: () => SeedInformation = () => ({seed: this.seed, frame: this.frame});
+    public original: () => SeedInformation = () => ({seed: this.original_seed, frame: this.original_frame});
 
     private setSeed(seed: SeedInteger) {
         this.s0 = seed;
@@ -164,19 +152,19 @@ class PokemonFrame {
         }
     }
 
-    public getData(pkmn: PokemonConfiguration) {
+    public getData(pkmn: PokemonEntry) {
         var ec = this.nextInt(SMASK, SMASK)
         var sidtid = this.nextInt(SMASK, SMASK)
         var pid = this.nextInt(SMASK, SMASK)
         var shiny = this.GetShinyType(pid, sidtid)
 
-        if(pkmn.ShinyForced) {
+        if(pkmn.isShinyForced()) {
             shiny = 2
         }
 
         var iv = [-1, -1, -1, -1, -1, -1]
         var i = 0
-        while(i < pkmn.FlawlessIVs) {
+        while(i < pkmn.flawLessIvsCount()) {
             var s = this.nextInt(bigInt[6], bigInt[7]);
             if (iv[s] == -1) {
                 i += 1
@@ -188,19 +176,20 @@ class PokemonFrame {
                 iv[i] = this.nextInt(bigInt[32], bigInt[31])
             }
         }
-        var ability: string|number = 0;
-        var abilityNames = ["1", "2", "H"]
-        if(pkmn.Ability < 3) {
-            ability = pkmn.Ability;
+        var ability: string = "1";
+        var abilityNames = ["1", "2", "H"];
+        var value_ability = pkmn.ability();
+        if(value_ability < 3) {
+            ability = "" + value_ability;
         } else {
-            if(pkmn.Ability == 3) {
+            if(value_ability == 3) {
                 ability = abilityNames[this.nextInt(bigInt[2], bigInt[1])];
             } else {
                 ability = abilityNames[this.nextInt(bigInt[3], bigInt[3])];
             }
         }
         
-        var gt = GenderRatios[pkmn.Species]
+        var gt = GenderRatios[pkmn.species()]
         var gender: GENDERS = GENDERS.MALE
         if(gt == 255) {
             gender = asGender(2)
@@ -213,9 +202,9 @@ class PokemonFrame {
         }
         
         var nature;
-        if(pkmn.Species == 849) {
+        if(pkmn.species() == 849) {
             var natures: number[] = [];
-            if (pkmn.AltForm == 0) {
+            if (pkmn.altForm() == 0) {
                 natures = Toxtricity.natures.amplified
             } else {
                 nature = Toxtricity.natures.lowkey;
@@ -235,7 +224,9 @@ class PokemonFrame {
             spe: iv[5], 
             nature: Data.natures[nature],
             gender: Data.genders[gender],
-            ability: ability
+            ability: ability,
+            current: this.current(),
+            original: this.original()
         }
     }
 }

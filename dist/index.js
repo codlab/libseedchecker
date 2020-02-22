@@ -1,13 +1,13 @@
 "use strict";
-//
-// original file : https://github.com/Leanny/leanny.github.io/blob/master/seedchecker/common.js
-//
 Object.defineProperty(exports, "__esModule", { value: true });
 const bigInt = require("big-integer");
 const toxtricity_1 = require("./toxtricity");
 const genders_json_1 = require("../configs/genders.json");
 const data_1 = require("./data");
-console.log(bigInt);
+var PokemonEntry_1 = require("./data/PokemonEntry");
+exports.PokemonEntry = PokemonEntry_1.PokemonEntry;
+var OnlineDataProvider_1 = require("./data/OnlineDataProvider");
+exports.OnlineDataProvider = OnlineDataProvider_1.OnlineDataProvider;
 var SHINY;
 (function (SHINY) {
     SHINY[SHINY["NONE"] = 0] = "NONE";
@@ -52,7 +52,7 @@ class PokemonFrame {
         this.seed = this.original_seed;
         this.original_frame = frame || 0;
         this.frame = frame || 0;
-        this.setSeed(this.original_seed, this.original_frame);
+        this.setSeed(this.original_seed);
     }
     isBigInteger(seed) {
         return seed.divide !== undefined;
@@ -120,12 +120,12 @@ class PokemonFrame {
         var sidtid = this.nextInt(SMASK, SMASK);
         var pid = this.nextInt(SMASK, SMASK);
         var shiny = this.GetShinyType(pid, sidtid);
-        if (pkmn.ShinyForced) {
+        if (pkmn.isShinyForced()) {
             shiny = 2;
         }
         var iv = [-1, -1, -1, -1, -1, -1];
         var i = 0;
-        while (i < pkmn.FlawlessIVs) {
+        while (i < pkmn.flawLessIvsCount()) {
             var s = this.nextInt(bigInt[6], bigInt[7]);
             if (iv[s] == -1) {
                 i += 1;
@@ -137,20 +137,21 @@ class PokemonFrame {
                 iv[i] = this.nextInt(bigInt[32], bigInt[31]);
             }
         }
-        var ability = 0;
+        var ability = "1";
         var abilityNames = ["1", "2", "H"];
-        if (pkmn.Ability < 3) {
-            ability = pkmn.Ability;
+        var value_ability = pkmn.ability();
+        if (value_ability < 3) {
+            ability = "" + value_ability;
         }
         else {
-            if (pkmn.Ability == 3) {
+            if (value_ability == 3) {
                 ability = abilityNames[this.nextInt(bigInt[2], bigInt[1])];
             }
             else {
                 ability = abilityNames[this.nextInt(bigInt[3], bigInt[3])];
             }
         }
-        var gt = genders_json_1.default[pkmn.Species];
+        var gt = genders_json_1.default[pkmn.species()];
         var gender = GENDERS.MALE;
         if (gt == 255) {
             gender = asGender(2);
@@ -165,9 +166,9 @@ class PokemonFrame {
             gender = asGender(this.nextInt(bigInt[253], bigInt[255]) + 1 < gt ? 1 : 0);
         }
         var nature;
-        if (pkmn.Species == 849) {
+        if (pkmn.species() == 849) {
             var natures = [];
-            if (pkmn.AltForm == 0) {
+            if (pkmn.altForm() == 0) {
                 natures = toxtricity_1.default.natures.amplified;
             }
             else {
@@ -188,7 +189,9 @@ class PokemonFrame {
             spe: iv[5],
             nature: data_1.default.natures[nature],
             gender: data_1.default.genders[gender],
-            ability: ability
+            ability: ability,
+            current: this.current(),
+            original: this.original()
         };
     }
 }
