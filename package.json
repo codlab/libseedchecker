@@ -30,6 +30,7 @@
     "package.json",
     "dist/",
     "configs/",
+    "statics/",
     "README.md",
     "LICENSE"
   ]
