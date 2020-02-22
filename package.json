@@ -5,10 +5,13 @@
   "main": "dist/index.js",
   "dependencies": {
     "big-integer": "^1.6.48",
+    "node-fetch": "^2.6.0",
     "tslib": "^1.10.0",
     "typescript": "^3.7.5"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@types/node-fetch": "^2.5.4"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc 2 ; echo done"

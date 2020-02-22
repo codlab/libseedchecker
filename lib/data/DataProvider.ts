@@ -19,7 +19,7 @@ export interface Nest {
 
 export interface GameNest {
   nestId: number,
-  pokemons: PokemonEntry
+  pokemons: PokemonEntry[]
 }
 
 export interface GameNests {

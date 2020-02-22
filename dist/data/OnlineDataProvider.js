@@ -9,20 +9,20 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const PokemonEntry_1 = require("./PokemonEntry");
-const https_1 = require("https");
+const node_fetch_1 = require("node-fetch");
 const DataProvider_1 = require("./DataProvider");
 const events_endpoint = "https://raw.githubusercontent.com/Leanny/SeedSearcher/master/Events/files.json";
 const event_endpoint = "https://raw.githubusercontent.com/Leanny/SeedSearcher/master/Events/";
 class OnlineDataProvider {
     load_events() {
         return __awaiter(this, void 0, void 0, function* () {
-            const list = yield https_1.default.get(events_endpoint);
+            const list = yield node_fetch_1.default(events_endpoint).then(r => r.json());
             return list;
         });
     }
     load_event(name) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { Tables } = yield https_1.default.get(event_endpoint + name);
+            const { Tables } = yield node_fetch_1.default(event_endpoint + name).then(r => r.json());
             return Tables.map((item, index) => {
                 const { Entries } = item;
                 return {
@@ -34,7 +34,8 @@ class OnlineDataProvider {
     }
     load_nests_in_game(game) {
         return __awaiter(this, void 0, void 0, function* () {
-            const nests = yield https_1.default.get(`https://leanny.github.io/seedchecker/nest${game}.json`);
+            const nests = yield node_fetch_1.default(`https://leanny.github.io/seedchecker/nest${game}.json`).then(r => r.json());
+            ;
             return nests.map((nest, nestId) => ({
                 nestId,
                 pokemons: nest.Entries.map(pokemon => new PokemonEntry_1.PokemonEntry(pokemon))
