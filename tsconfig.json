@@ -18,8 +18,7 @@
     "skipLibCheck": true
   },
   "files": [
-    "lib/index.ts",
-    "lib/test/index.ts"
+    "lib/index.ts"
   ],
   "exclude": [
     "build",
