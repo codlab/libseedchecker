@@ -3,8 +3,8 @@ const list = 'Bulbasaur:1|Ivysaur:2|Venusaur:3|Charmander:4|Charmeleon:5|Chariza
 
 export interface PokemonItem {
     name: string,
-    id: number,
-    species_id?: number
+    dex: number,
+    listing_id?: number
 }
 
 const _listing: PokemonItem[] = list.split("|")
@@ -16,8 +16,8 @@ const _listing: PokemonItem[] = list.split("|")
 
         return {
             name: split[0],
-            id: parseInt(ids[0]),
-            species_id: ids.length > 1 ? parseInt(ids[1]) : null
+            dex: ids[0],
+            listing_id: split[1]
         }
     }
 
