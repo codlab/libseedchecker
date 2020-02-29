@@ -1,0 +1,20 @@
+{
+  "name": "fetch",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/es6-promisify": "^6.0.0",
+    "@types/nodegit": "^0.26.1",
+    "es6-promisify": "^6.0.2",
+    "fs": "0.0.1-security",
+    "ncp": "^2.0.0",
+    "nodegit": "^0.26.5",
+    "rmdir-recursive": "0.0.1"
+  }
+}
