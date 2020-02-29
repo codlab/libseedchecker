@@ -3,8 +3,8 @@ const nest = require("../../configs/nests.json");
 
 export enum Game {
   NONE,
-  SHIELD,
-  SWORD
+  SWORD,
+  SHIELD
 }
 
 export interface GameEvent {
