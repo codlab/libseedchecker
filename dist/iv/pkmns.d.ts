@@ -1,6 +1,6 @@
 export interface PokemonItem {
     name: string;
-    id: number;
-    species_id?: number;
+    dex: number;
+    listing_id?: number;
 }
 export declare const PokemonList: PokemonItem[];

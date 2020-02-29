@@ -8,8 +8,8 @@ const _listing = list.split("|")
         const ids = split[1].split(".");
         return {
             name: split[0],
-            id: parseInt(ids[0]),
-            species_id: ids.length > 1 ? parseInt(ids[1]) : null
+            dex: ids[0],
+            listing_id: split[1]
         };
     }
     return null;

@@ -38,16 +38,13 @@ declare class PokemonFrame {
     GetShinyXor(n: number): number;
     GetShinyType(pid: number, tidsid: number): SHINY;
     advanceFrame(frame: number): void;
-    getShinyState(): {
+    getShinyState(pkmn?: PokemonEntry): {
         ec: number;
         sidtid: number;
         pid: number;
         shiny: SHINY;
         current: SeedInformation;
         original: SeedInformation;
-    };
-    getData(pkmn: PokemonEntry): {
-        shiny: SHINY;
         hp: number;
         atk: number;
         def: number;
@@ -57,8 +54,30 @@ declare class PokemonFrame {
         nature: string;
         gender: string;
         ability: string;
+    } | {
+        ec: number;
+        sidtid: number;
+        pid: number;
+        shiny: SHINY;
         current: SeedInformation;
         original: SeedInformation;
+    };
+    getData(pkmn: PokemonEntry): {
+        ec: number;
+        sidtid: number;
+        pid: number;
+        shiny: SHINY;
+        current: SeedInformation;
+        original: SeedInformation;
+        hp: number;
+        atk: number;
+        def: number;
+        spa: number;
+        spd: number;
+        spe: number;
+        nature: string;
+        gender: string;
+        ability: string;
     };
 }
 export default PokemonFrame;
