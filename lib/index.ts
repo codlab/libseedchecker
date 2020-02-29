@@ -1,4 +1,3 @@
-import { OnlineDataProvider } from './data/OnlineDataProvider';
 //
 // original file : https://github.com/Leanny/leanny.github.io/blob/master/seedchecker/common.js
 //
@@ -11,6 +10,8 @@ const bigInt = require("big-integer");
 const GenderRatios = require("../configs/genders.json");
 
 import { PokemonEntry } from "./data/PokemonEntry";
+
+export { CalcIVS, PokemonList, PokemonItem } from './iv';
 
 export { PokemonEntry } from "./data/PokemonEntry";
 export { PokemonEntryRepresentation } from "./data/PokemonEntry";
