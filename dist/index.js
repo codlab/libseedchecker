@@ -1,9 +1,15 @@
 "use strict";
+//
+// original file : https://github.com/Leanny/leanny.github.io/blob/master/seedchecker/common.js
+//
 Object.defineProperty(exports, "__esModule", { value: true });
 const toxtricity_1 = require("./toxtricity");
 const data_1 = require("./data");
 const bigInt = require("big-integer");
 const GenderRatios = require("../configs/genders.json");
+var iv_1 = require("./iv");
+exports.CalcIVS = iv_1.CalcIVS;
+exports.PokemonList = iv_1.PokemonList;
 var PokemonEntry_1 = require("./data/PokemonEntry");
 exports.PokemonEntry = PokemonEntry_1.PokemonEntry;
 var OnlineDataProvider_1 = require("./data/OnlineDataProvider");

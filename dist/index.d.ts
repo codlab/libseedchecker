@@ -1,5 +1,6 @@
 import BigIntegerDefinition from "big-integer";
 import { PokemonEntry } from "./data/PokemonEntry";
+export { CalcIVS, PokemonList, PokemonItem } from './iv';
 export { PokemonEntry } from "./data/PokemonEntry";
 export { PokemonEntryRepresentation } from "./data/PokemonEntry";
 export { OnlineDataProvider } from "./data/OnlineDataProvider";
@@ -7,12 +8,12 @@ export declare type SeedInteger = BigIntegerDefinition.BigInteger;
 export declare enum SHINY {
     NONE = 0,
     STAR = 1,
-    SQUARE = 2,
+    SQUARE = 2
 }
 export declare enum GENDERS {
     MALE = 0,
     FEMALE = 1,
-    GENDERLESS = 2,
+    GENDERLESS = 2
 }
 export interface SeedInformation {
     seed: SeedInteger;
@@ -27,11 +28,11 @@ declare class PokemonFrame {
     frame: number;
     original_frame: number;
     constructor(seed: SeedInteger | string, frame?: number);
-    private isBigInteger(seed);
+    private isBigInteger;
     current: () => SeedInformation;
     original: () => SeedInformation;
-    private setSeed(seed);
-    next(): BigIntegerDefinition.BigInteger;
+    private setSeed;
+    next(): any;
     nextInt(num: SeedInteger, mask: SeedInteger): number;
     GetShinyValue(n: number): number;
     GetShinyXor(n: number): number;
