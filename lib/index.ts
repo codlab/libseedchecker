@@ -136,7 +136,9 @@ class PokemonFrame {
         this.frame += frame;
     }
 
-    public getShinyState() {
+    public getShinyState(pkmn?: PokemonEntry) {
+        if(pkmn) return this.getData(pkmn);
+
         this.setSeed(this.seed);
 
         var ec = this.nextInt(SMASK, SMASK)
@@ -155,6 +157,8 @@ class PokemonFrame {
     }
 
     public getData(pkmn: PokemonEntry) {
+        this.setSeed(this.seed);
+
         var ec = this.nextInt(SMASK, SMASK)
         var sidtid = this.nextInt(SMASK, SMASK)
         var pid = this.nextInt(SMASK, SMASK)
@@ -217,7 +221,12 @@ class PokemonFrame {
         }
 
         return {
+            ec,
+            sidtid,
+            pid,
             shiny: shiny,
+            current: this.current(),
+            original: this.original(),
             hp: iv[0],
             atk: iv[1],
             def: iv[2], 
@@ -226,9 +235,7 @@ class PokemonFrame {
             spe: iv[5], 
             nature: Data.natures[nature],
             gender: Data.genders[gender],
-            ability: ability,
-            current: this.current(),
-            original: this.original()
+            ability: ability
         }
     }
 }
