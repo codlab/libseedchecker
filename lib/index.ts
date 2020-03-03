@@ -11,11 +11,14 @@ const GenderRatios = require("../configs/genders.json");
 
 import { PokemonEntry } from "./data/PokemonEntry";
 
+export { Configs } from "./configs";
 export { CalcIVS, PokemonList, PokemonItem } from './iv';
 
 export { PokemonEntry } from "./data/PokemonEntry";
 export { PokemonEntryRepresentation } from "./data/PokemonEntry";
 export { OnlineDataProvider } from "./data/OnlineDataProvider";
+
+
 
 export type SeedInteger = BigIntegerDefinition.BigInteger;
 export enum SHINY {

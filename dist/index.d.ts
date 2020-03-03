@@ -1,5 +1,6 @@
 import BigIntegerDefinition from "big-integer";
 import { PokemonEntry } from "./data/PokemonEntry";
+export { Configs } from "./configs";
 export { CalcIVS, PokemonList, PokemonItem } from './iv';
 export { PokemonEntry } from "./data/PokemonEntry";
 export { PokemonEntryRepresentation } from "./data/PokemonEntry";
