@@ -9,11 +9,12 @@ export interface Data {
 export interface Nest {
     normal: number;
     rare: number;
-    location: any;
+    location: number;
 }
 export interface ConfigsContent {
     data: Data;
     genders: string[];
+    names: string[];
     nests: Nest;
 }
 export declare const Configs: ConfigsContent;

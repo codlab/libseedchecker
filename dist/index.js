@@ -14,6 +14,8 @@ exports.CalcIVS = iv_1.CalcIVS;
 exports.PokemonList = iv_1.PokemonList;
 var PokemonEntry_1 = require("./data/PokemonEntry");
 exports.PokemonEntry = PokemonEntry_1.PokemonEntry;
+var DataProvider_1 = require("./data/DataProvider");
+exports.Game = DataProvider_1.Game;
 var OnlineDataProvider_1 = require("./data/OnlineDataProvider");
 exports.OnlineDataProvider = OnlineDataProvider_1.OnlineDataProvider;
 var SHINY;

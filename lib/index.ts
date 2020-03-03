@@ -16,6 +16,7 @@ export { CalcIVS, PokemonList, PokemonItem } from './iv';
 
 export { PokemonEntry } from "./data/PokemonEntry";
 export { PokemonEntryRepresentation } from "./data/PokemonEntry";
+export { Game } from "./data/DataProvider";
 export { OnlineDataProvider } from "./data/OnlineDataProvider";
 
 
