@@ -17,10 +17,10 @@ export class OnlineDataProvider implements DataProvider {
     const { Tables } = await fetch(event_endpoint + name).then(r=>r.json());
 
     return (Tables as any[]).map((item, index) => {
-      const { Entries } = item;
+      const { Entries, GameVersion } = item;
 
       return {
-        game: index,
+        game: GameVersion ? GameVersion : index + 1,
         pokemons: (Entries as any[]).map(item => new PokemonEntry(item))
       };
     })
