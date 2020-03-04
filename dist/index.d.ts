@@ -1,8 +1,10 @@
 import BigIntegerDefinition from "big-integer";
 import { PokemonEntry } from "./data/PokemonEntry";
+export { Configs } from "./configs";
 export { CalcIVS, PokemonList, PokemonItem } from './iv';
 export { PokemonEntry } from "./data/PokemonEntry";
 export { PokemonEntryRepresentation } from "./data/PokemonEntry";
+export { Game } from "./data/DataProvider";
 export { OnlineDataProvider } from "./data/OnlineDataProvider";
 export declare type SeedInteger = BigIntegerDefinition.BigInteger;
 export declare enum SHINY {
@@ -38,16 +40,13 @@ declare class PokemonFrame {
     GetShinyXor(n: number): number;
     GetShinyType(pid: number, tidsid: number): SHINY;
     advanceFrame(frame: number): void;
-    getShinyState(): {
+    getShinyState(pkmn?: PokemonEntry): {
         ec: number;
         sidtid: number;
         pid: number;
         shiny: SHINY;
         current: SeedInformation;
         original: SeedInformation;
-    };
-    getData(pkmn: PokemonEntry): {
-        shiny: SHINY;
         hp: number;
         atk: number;
         def: number;
@@ -57,8 +56,30 @@ declare class PokemonFrame {
         nature: string;
         gender: string;
         ability: string;
+    } | {
+        ec: number;
+        sidtid: number;
+        pid: number;
+        shiny: SHINY;
         current: SeedInformation;
         original: SeedInformation;
+    };
+    getData(pkmn: PokemonEntry): {
+        ec: number;
+        sidtid: number;
+        pid: number;
+        shiny: SHINY;
+        current: SeedInformation;
+        original: SeedInformation;
+        hp: number;
+        atk: number;
+        def: number;
+        spa: number;
+        spd: number;
+        spe: number;
+        nature: string;
+        gender: string;
+        ability: string;
     };
 }
 export default PokemonFrame;

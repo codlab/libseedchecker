@@ -7,11 +7,15 @@ const toxtricity_1 = require("./toxtricity");
 const data_1 = require("./data");
 const bigInt = require("big-integer");
 const GenderRatios = require("../configs/genders.json");
+var configs_1 = require("./configs");
+exports.Configs = configs_1.Configs;
 var iv_1 = require("./iv");
 exports.CalcIVS = iv_1.CalcIVS;
 exports.PokemonList = iv_1.PokemonList;
 var PokemonEntry_1 = require("./data/PokemonEntry");
 exports.PokemonEntry = PokemonEntry_1.PokemonEntry;
+var DataProvider_1 = require("./data/DataProvider");
+exports.Game = DataProvider_1.Game;
 var OnlineDataProvider_1 = require("./data/OnlineDataProvider");
 exports.OnlineDataProvider = OnlineDataProvider_1.OnlineDataProvider;
 var SHINY;
@@ -106,7 +110,9 @@ class PokemonFrame {
         this.seed = seed;
         this.frame += frame;
     }
-    getShinyState() {
+    getShinyState(pkmn) {
+        if (pkmn)
+            return this.getData(pkmn);
         this.setSeed(this.seed);
         var ec = this.nextInt(SMASK, SMASK);
         var sidtid = this.nextInt(SMASK, SMASK);
@@ -122,6 +128,7 @@ class PokemonFrame {
         };
     }
     getData(pkmn) {
+        this.setSeed(this.seed);
         var ec = this.nextInt(SMASK, SMASK);
         var sidtid = this.nextInt(SMASK, SMASK);
         var pid = this.nextInt(SMASK, SMASK);
@@ -186,7 +193,12 @@ class PokemonFrame {
             nature = this.nextInt(bigInt[25], bigInt[31]);
         }
         return {
+            ec,
+            sidtid,
+            pid,
             shiny: shiny,
+            current: this.current(),
+            original: this.original(),
             hp: iv[0],
             atk: iv[1],
             def: iv[2],
@@ -195,9 +207,7 @@ class PokemonFrame {
             spe: iv[5],
             nature: data_1.default.natures[nature],
             gender: data_1.default.genders[gender],
-            ability: ability,
-            current: this.current(),
-            original: this.original()
+            ability: ability
         };
     }
 }
