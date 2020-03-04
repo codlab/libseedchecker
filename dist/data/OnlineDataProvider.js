@@ -24,9 +24,9 @@ class OnlineDataProvider {
         return __awaiter(this, void 0, void 0, function* () {
             const { Tables } = yield node_fetch_1.default(event_endpoint + name).then(r => r.json());
             return Tables.map((item, index) => {
-                const { Entries } = item;
+                const { Entries, GameVersion } = item;
                 return {
-                    game: index,
+                    game: GameVersion ? GameVersion : index + 1,
                     pokemons: Entries.map(item => new PokemonEntry_1.PokemonEntry(item))
                 };
             });

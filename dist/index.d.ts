@@ -10,12 +10,12 @@ export declare type SeedInteger = BigIntegerDefinition.BigInteger;
 export declare enum SHINY {
     NONE = 0,
     STAR = 1,
-    SQUARE = 2
+    SQUARE = 2,
 }
 export declare enum GENDERS {
     MALE = 0,
     FEMALE = 1,
-    GENDERLESS = 2
+    GENDERLESS = 2,
 }
 export interface SeedInformation {
     seed: SeedInteger;
@@ -30,11 +30,11 @@ declare class PokemonFrame {
     frame: number;
     original_frame: number;
     constructor(seed: SeedInteger | string, frame?: number);
-    private isBigInteger;
+    private isBigInteger(seed);
     current: () => SeedInformation;
     original: () => SeedInformation;
-    private setSeed;
-    next(): any;
+    private setSeed(seed);
+    next(): BigIntegerDefinition.BigInteger;
     nextInt(num: SeedInteger, mask: SeedInteger): number;
     GetShinyValue(n: number): number;
     GetShinyXor(n: number): number;

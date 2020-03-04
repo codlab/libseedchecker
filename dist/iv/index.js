@@ -577,7 +577,7 @@ class CalcIVS {
         var bonus = natures[nature][(stat - 1)];
         if (!basestat)
             return -1;
-        if (stat == Stat.HP) { //HP uses a different formula
+        if (stat == Stat.HP) {
             if (species == 292) {
                 return 1;
             } //Shedinja Case
@@ -588,7 +588,7 @@ class CalcIVS {
     get_closest_iv(species, stat, stat_calculating, statev, pokelvl, nature) {
         var last_closest_diff = 9999999, last_closest_iv = 0;
         var i = 0;
-        while (i < 32) { //when diff is growing again... we skipped -> return right away
+        while (i < 32) {
             var temp_stat = this.calc_stat(species, stat_calculating, i, statev, pokelvl, nature);
             var diff = Math.abs(stat - temp_stat);
             if (diff < last_closest_diff) {

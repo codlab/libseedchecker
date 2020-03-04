@@ -2,7 +2,7 @@ import { PokemonEntry } from './PokemonEntry';
 export declare enum Game {
     NONE = 0,
     SWORD = 1,
-    SHIELD = 2
+    SHIELD = 2,
 }
 export interface GameEvent {
     game: Game;
