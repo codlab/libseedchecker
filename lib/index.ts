@@ -190,7 +190,7 @@ class PokemonFrame {
         var abilityNames = ["1", "2", "H"];
         var value_ability = pkmn.ability();
         if(value_ability < 3) {
-            ability = "" + value_ability;
+            ability = abilityNames[value_ability];
         } else {
             if(value_ability == 3) {
                 ability = abilityNames[this.nextInt(bigInt[2], bigInt[1])];
